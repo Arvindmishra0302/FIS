@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "ef5a3502-cf6d-490f-920f-2277e66d405e",
+		"name": "FIS",
+		"description": "demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15209611",
+		"_collection_link": "https://arvind-7303.postman.co/workspace/Arvind-Workspace~e45bd233-7854-4061-b896-f51c60cdbea9/collection/15209611-ef5a3502-cf6d-490f-920f-2277e66d405e?action=share&source=collection_link&creator=15209611"
+	},
+	"item": [
+		{
+			"name": "FIS_API_DEMO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response body has the required properties\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('bpi');\r",
+							"    pm.expect(jsonData.bpi).to.have.property('USD');\r",
+							"    pm.expect(jsonData.bpi).to.have.property('GBP');\r",
+							"    pm.expect(jsonData.bpi).to.have.property('EUR');\r",
+							"     pm.expect(jsonData.bpi.GBP).to.have.property('description').to.equal('British Pound Sterling');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{demo}}",
+					"host": [
+						"{{demo}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
