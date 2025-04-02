@@ -1,9 +1,12 @@
 package com.common.testcase;
+import org.testng.annotations.Test;
+import com.common.page.*;
 
-
+@Test
 public class EbaySearchTest {
-    public static void main(String[] args) {
-    	    com.common.page.EbaySearch.openebay();
+    public static <EbaySerach> void main(String[] args) {
+    	EbaySearch ebaysearch=new EbaySearch();
+    	ebaysearch.openebay();
 
         }
 }
