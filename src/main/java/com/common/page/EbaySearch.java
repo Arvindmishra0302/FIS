@@ -1,40 +1,38 @@
-package com.common.testcase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+package com.common.page;
 
+import static org.testng.Assert.assertEquals;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import static org.testng.Assert.assertEquals;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class EbaySearch {
-    public static void main(String[] args) {
-    	// Create a logger instance
-    	
-    	 Logger logger =LogManager.getLogger();
+	 static Logger logger =LogManager.getLogger();
+	public static void openebay()
+	{
+		 try {
+			 Logger logger =LogManager.getLogger();
+		       
+		    	// Set up ChromeDriver
+		        System.setProperty("webdriver.chrome.driver", "D:\\Demo\\FIS\\chromedriver\\chromedriver.exe");
+		        ChromeOptions options = new ChromeOptions();
+		        options.addArguments("--start-maximized");
+		        WebDriver driver = new ChromeDriver(options);
+		        logger.info("Starting Selenium test and opening eBay.com");
 
-    	// Set up ChromeDriver
-        System.setProperty("webdriver.chrome.driver", "D:\\Demo\\FIS\\chromedriver\\chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        WebDriver driver = new ChromeDriver(options);
-
-        try {
-        	 logger.info("Starting Selenium test and opening eBay.com");
-
-        	// Open eBay.com
-            driver.get("https://www.ebay.com");
-
-            // Use WebDriverWait for the search box to be visible
+	        	// Open eBay.com
+	            driver.get("https://www.ebay.com");
+	          
+        	// Use WebDriverWait for the search box to be visible
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             logger.info("Waiting for the search box to be visible...");
 
@@ -77,6 +75,12 @@ public class EbaySearch {
             ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
     	    driver.switchTo().window(tabs.get(1));
     	    Thread.sleep(100);
+    	   
+
+            // Scroll down by a specific pixel value
+            js.executeScript("window.scrollBy(0, 100)");
+
+
     	    driver.findElement(By.xpath("//span[contains(text(),'Add to cart')]")).click();
     	    Thread.sleep(1000);
     	    
@@ -99,8 +103,11 @@ public class EbaySearch {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // Close the browser
-            driver.quit();
+            ChromeDriver chromeDriver = new ChromeDriver();
+			// Close the browser
+            chromeDriver.quit();
         }
-    }
+
+	}
+
 }
